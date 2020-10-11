@@ -1,0 +1,626 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="legged">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="fl">
+        <joint name="worldToBasefoot" />
+        <joint name="base_link_joint" />
+        <joint name="lf_hinge_1" />
+        <joint name="lf_hinge_2" />
+        <joint name="lf_upper_joint" />
+        <joint name="lf_hinge_3" />
+        <joint name="lf_lower_joint" />
+        <joint name="lf_hinge_4" />
+        <joint name="lf_ball_joint" />
+        <chain base_link="base_foot" tip_link="lf_link_ball" />
+    </group>
+    <group name="end_fl">
+        <link name="lf_link_foot" />
+        <link name="lf_link_ball" />
+        <joint name="lf_ball_joint" />
+    </group>
+    <group name="lr">
+        <joint name="worldToBasefoot" />
+        <joint name="base_link_joint" />
+        <joint name="lr_hinge_1" />
+        <joint name="lr_hinge_2" />
+        <joint name="lr_upper_joint" />
+        <joint name="lr_hinge_3" />
+        <joint name="lr_lower_joint" />
+        <joint name="lr_hinge_4" />
+        <joint name="lr_link_ball_joint" />
+        <chain base_link="base_foot" tip_link="lr_link_ball" />
+    </group>
+    <group name="end_lr">
+        <link name="lr_link_foot" />
+        <link name="lr_link_ball" />
+        <joint name="lr_link_ball_joint" />
+    </group>
+    <group name="rr">
+        <joint name="worldToBasefoot" />
+        <joint name="base_link_joint" />
+        <joint name="jrr_hinge_1" />
+        <joint name="jrr_hinge_2" />
+        <joint name="rr_upper_joint" />
+        <joint name="jrr_hinge_3" />
+        <joint name="rr_lower_joint" />
+        <joint name="jrr_hinge_4" />
+        <joint name="rr_link_ball_joint" />
+        <chain base_link="base_foot" tip_link="rr_link_ball" />
+    </group>
+    <group name="end_rr">
+        <link name="rr_link_foot" />
+        <link name="rr_link_ball" />
+        <joint name="rr_link_ball_joint" />
+    </group>
+    <group name="rf">
+        <joint name="worldToBasefoot" />
+        <joint name="base_link_joint" />
+        <joint name="rf_hinge_1" />
+        <joint name="rf_hinge_2" />
+        <joint name="rf_upper_joint" />
+        <joint name="rf_hinge_3" />
+        <joint name="rf_lower_joint" />
+        <joint name="rf_hinge_4" />
+        <joint name="rf_ball_joint" />
+        <chain base_link="base_foot" tip_link="rf_link_ball" />
+    </group>
+    <group name="end_rf">
+        <link name="rf_link_foot" />
+        <link name="rf_link_ball" />
+        <joint name="rf_ball_joint" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="Pose_1" group="fl">
+        <joint name="lf_hinge_1" value="0.315" />
+        <joint name="lf_hinge_2" value="0" />
+        <joint name="lf_hinge_3" value="-0.41" />
+        <joint name="lf_hinge_4" value="-0.4242" />
+    </group_state>
+    <group_state name="Pose_2" group="lr">
+        <joint name="lr_hinge_1" value="0.315" />
+        <joint name="lr_hinge_2" value="0" />
+        <joint name="lr_hinge_3" value="-0.41" />
+        <joint name="lr_hinge_4" value="-0.4242" />
+    </group_state>
+    <group_state name="Pose_3" group="rr">
+        <joint name="jrr_hinge_1" value="0.315" />
+        <joint name="jrr_hinge_2" value="0" />
+        <joint name="jrr_hinge_3" value="-0.41" />
+        <joint name="jrr_hinge_4" value="-0.4242" />
+    </group_state>
+    <group_state name="Pose_4" group="rf">
+        <joint name="rf_hinge_1" value="0.315" />
+        <joint name="rf_hinge_2" value="0" />
+        <joint name="rf_hinge_3" value="-0.41" />
+        <joint name="rf_hinge_4" value="-0.4242" />
+    </group_state>
+    <group_state name="fl_back" group="fl">
+        <joint name="lf_hinge_1" value="0.9172" />
+        <joint name="lf_hinge_2" value="0" />
+        <joint name="lf_hinge_3" value="-1.25" />
+        <joint name="lf_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="lr_back" group="lr">
+        <joint name="lr_hinge_1" value="0.9172" />
+        <joint name="lr_hinge_2" value="0" />
+        <joint name="lr_hinge_3" value="-1.25" />
+        <joint name="lr_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="rr_back" group="rr">
+        <joint name="jrr_hinge_1" value="0.9172" />
+        <joint name="jrr_hinge_2" value="0" />
+        <joint name="jrr_hinge_3" value="-1.25" />
+        <joint name="jrr_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="rf_back" group="rf">
+        <joint name="rf_hinge_1" value="0.9172" />
+        <joint name="rf_hinge_2" value="0" />
+        <joint name="rf_hinge_3" value="-1.25" />
+        <joint name="rf_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="fl_front" group="fl">
+        <joint name="lf_hinge_1" value="0.9172" />
+        <joint name="lf_hinge_2" value="0" />
+        <joint name="lf_hinge_3" value="-1.25" />
+        <joint name="lf_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="lr_front" group="lr">
+        <joint name="lr_hinge_1" value="0.9172" />
+        <joint name="lr_hinge_2" value="0" />
+        <joint name="lr_hinge_3" value="-1.25" />
+        <joint name="lr_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="rr_front" group="rr">
+        <joint name="jrr_hinge_1" value="0.9172" />
+        <joint name="jrr_hinge_2" value="0" />
+        <joint name="jrr_hinge_3" value="-1.25" />
+        <joint name="jrr_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="rf_front" group="rf">
+        <joint name="rf_hinge_1" value="0.9172" />
+        <joint name="rf_hinge_2" value="0" />
+        <joint name="rf_hinge_3" value="-1.25" />
+        <joint name="rf_hinge_4" value="-1.5305" />
+    </group_state>
+
+
+    <group_state name="fl_backleft" group="fl">
+        <joint name="lf_hinge_1" value="0.9172" />
+        <joint name="lf_hinge_2" value="0.1963" />
+        <joint name="lf_hinge_3" value="-1.25" />
+        <joint name="lf_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="lr_backleft" group="lr">
+        <joint name="lr_hinge_1" value="0.9172" />
+        <joint name="lr_hinge_2" value="0.1963" />
+        <joint name="lr_hinge_3" value="-1.25" />
+        <joint name="lr_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="rr_backleft" group="rr">
+        <joint name="jrr_hinge_1" value="0.9172" />
+        <joint name="jrr_hinge_2" value="0.1963" />
+        <joint name="jrr_hinge_3" value="-1.25" />
+        <joint name="jrr_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="rf_backleft" group="rf">
+        <joint name="rf_hinge_1" value="0.9172" />
+        <joint name="rf_hinge_2" value="0.1963" />
+        <joint name="rf_hinge_3" value="-1.25" />
+        <joint name="rf_hinge_4" value="-1.0208" />
+    </group_state>
+
+    <group_state name="fl_backright" group="fl">
+        <joint name="lf_hinge_1" value="0.9172" />
+        <joint name="lf_hinge_2" value="-0.1963" />
+        <joint name="lf_hinge_3" value="-1.25" />
+        <joint name="lf_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="lr_backright" group="lr">
+        <joint name="lr_hinge_1" value="0.9172" />
+        <joint name="lr_hinge_2" value="-0.1963" />
+        <joint name="lr_hinge_3" value="-1.25" />
+        <joint name="lr_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="rr_backright" group="rr">
+        <joint name="jrr_hinge_1" value="0.9172" />
+        <joint name="jrr_hinge_2" value="-0.1963" />
+        <joint name="jrr_hinge_3" value="-1.25" />
+        <joint name="jrr_hinge_4" value="-1.0208" />
+    </group_state>
+    <group_state name="rf_backright" group="rf">
+        <joint name="rf_hinge_1" value="0.9172" />
+        <joint name="rf_hinge_2" value="-0.1963" />
+        <joint name="rf_hinge_3" value="-1.25" />
+        <joint name="rf_hinge_4" value="-1.0208" />
+    </group_state>
+
+    <group_state name="fl_frontleft" group="fl">
+        <joint name="lf_hinge_1" value="0.9172" />
+        <joint name="lf_hinge_2" value="0.1963" />
+        <joint name="lf_hinge_3" value="-1.25" />
+        <joint name="lf_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="lr_frontleft" group="lr">
+        <joint name="lr_hinge_1" value="0.9172" />
+        <joint name="lr_hinge_2" value="0.1963" />
+        <joint name="lr_hinge_3" value="-1.25" />
+        <joint name="lr_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="rr_frontleft" group="rr">
+        <joint name="jrr_hinge_1" value="0.9172" />
+        <joint name="jrr_hinge_2" value="0.1963" />
+        <joint name="jrr_hinge_3" value="-1.25" />
+        <joint name="jrr_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="rf_frontleft" group="rf">
+        <joint name="rf_hinge_1" value="0.9172" />
+        <joint name="rf_hinge_2" value="0.1963" />
+        <joint name="rf_hinge_3" value="-1.25" />
+        <joint name="rf_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="fl_frontright" group="fl">
+        <joint name="lf_hinge_1" value="0.9172" />
+        <joint name="lf_hinge_2" value="-0.1963" />
+        <joint name="lf_hinge_3" value="-1.25" />
+        <joint name="lf_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="lr_frontright" group="lr">
+        <joint name="lr_hinge_1" value="0.9172" />
+        <joint name="lr_hinge_2" value="-0.1963" />
+        <joint name="lr_hinge_3" value="-1.25" />
+        <joint name="lr_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="rr_frontright" group="rr">
+        <joint name="jrr_hinge_1" value="0.9172" />
+        <joint name="jrr_hinge_2" value="-0.1963" />
+        <joint name="jrr_hinge_3" value="-1.25" />
+        <joint name="jrr_hinge_4" value="-1.5305" />
+    </group_state>
+    <group_state name="rf_frontright" group="rf">
+        <joint name="rf_hinge_1" value="0.9172" />
+        <joint name="rf_hinge_2" value="-0.1963" />
+        <joint name="rf_hinge_3" value="-1.25" />
+        <joint name="rf_hinge_4" value="-1.5305" />
+    </group_state>
+
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="ee_fl" parent_link="base_foot" group="end_fl" parent_group="fl" />
+    <end_effector name="ee_lr" parent_link="base_foot" group="end_lr" parent_group="lr" />
+    <end_effector name="ee_rr" parent_link="base_foot" group="end_rr" parent_group="rr" />
+    <end_effector name="ee_rf" parent_link="base_foot" group="end_rf" parent_group="rf" />
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="worldToBasefoot" type="fixed" parent_frame="world" child_link="base_foot" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="base_link" link2="lf_base" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="lf_link_ball" reason="Never" />
+    <disable_collisions link1="base_link" link2="lf_link_foot" reason="Never" />
+    <disable_collisions link1="base_link" link2="lf_link_lower" reason="Never" />
+    <disable_collisions link1="base_link" link2="lf_link_upper" reason="Never" />
+    <disable_collisions link1="base_link" link2="lf_lower" reason="Never" />
+    <disable_collisions link1="base_link" link2="lf_upper" reason="Never" />
+    <disable_collisions link1="base_link" link2="lr_base" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="lr_link_lower" reason="Never" />
+    <disable_collisions link1="base_link" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="base_link" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="base_link" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="base_link" link2="rf_base" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="base_link" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="base_link" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="base_link" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="base_link" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="base_link" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="base_link" link2="rr_base" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="base_link" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="base_link" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="base_link" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lf_link_ball" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lf_link_foot" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lf_link_upper" reason="Adjacent" />
+    <disable_collisions link1="lf_base" link2="lf_lower" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lf_upper" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lr_base" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="lf_base" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lf_base" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="lf_link_foot" reason="Adjacent" />
+    <disable_collisions link1="lf_link_ball" link2="lf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="lf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="lf_lower" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="lf_upper" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="lr_base" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lf_link_ball" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="lf_link_lower" reason="Default" />
+    <disable_collisions link1="lf_link_foot" link2="lf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="lf_lower" reason="Adjacent" />
+    <disable_collisions link1="lf_link_foot" link2="lf_upper" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="lr_base" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lf_link_foot" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="lf_link_upper" reason="Default" />
+    <disable_collisions link1="lf_link_lower" link2="lf_lower" reason="Adjacent" />
+    <disable_collisions link1="lf_link_lower" link2="lf_upper" reason="Adjacent" />
+    <disable_collisions link1="lf_link_lower" link2="lr_base" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="lr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lf_link_lower" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="lf_lower" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="lf_upper" reason="Adjacent" />
+    <disable_collisions link1="lf_link_upper" link2="lr_base" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="lr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lf_link_upper" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="lf_upper" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="lr_base" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="lr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lf_lower" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="lr_base" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="lr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lf_upper" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lr_base" link2="lr_link_ball" reason="Never" />
+    <disable_collisions link1="lr_base" link2="lr_link_foot" reason="Never" />
+    <disable_collisions link1="lr_base" link2="lr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_base" link2="lr_link_upper" reason="Adjacent" />
+    <disable_collisions link1="lr_base" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="lr_base" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lr_base" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="lr_link_foot" reason="Adjacent" />
+    <disable_collisions link1="lr_link_ball" link2="lr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lr_link_ball" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="lr_link_lower" reason="Default" />
+    <disable_collisions link1="lr_link_foot" link2="lr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="lr_lower" reason="Adjacent" />
+    <disable_collisions link1="lr_link_foot" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lr_link_foot" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="lr_link_upper" reason="Default" />
+    <disable_collisions link1="lr_link_lower" link2="lr_lower" reason="Adjacent" />
+    <disable_collisions link1="lr_link_lower" link2="lr_upper" reason="Adjacent" />
+    <disable_collisions link1="lr_link_lower" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lr_link_lower" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="lr_lower" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="lr_upper" reason="Adjacent" />
+    <disable_collisions link1="lr_link_upper" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lr_link_upper" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="lr_upper" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lr_lower" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rf_base" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rr_base" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="lr_upper" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rf_link_ball" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rf_link_foot" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rf_link_upper" reason="Adjacent" />
+    <disable_collisions link1="rf_base" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rr_base" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="rf_base" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rf_link_ball" link2="rf_link_foot" reason="Adjacent" />
+    <disable_collisions link1="rf_link_ball" link2="rf_link_lower" reason="Never" />
+    <disable_collisions link1="rf_link_ball" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="rf_link_ball" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="rf_link_ball" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="rf_link_ball" link2="rr_base" reason="Never" />
+    <disable_collisions link1="rf_link_ball" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rf_link_foot" link2="rf_link_lower" reason="Default" />
+    <disable_collisions link1="rf_link_foot" link2="rf_link_upper" reason="Never" />
+    <disable_collisions link1="rf_link_foot" link2="rf_lower" reason="Adjacent" />
+    <disable_collisions link1="rf_link_foot" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="rf_link_foot" link2="rr_base" reason="Never" />
+    <disable_collisions link1="rf_link_foot" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rf_link_foot" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rf_link_lower" link2="rf_link_upper" reason="Default" />
+    <disable_collisions link1="rf_link_lower" link2="rf_lower" reason="Adjacent" />
+    <disable_collisions link1="rf_link_lower" link2="rf_upper" reason="Adjacent" />
+    <disable_collisions link1="rf_link_lower" link2="rr_base" reason="Never" />
+    <disable_collisions link1="rf_link_lower" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="rf_link_lower" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rf_link_lower" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="rf_link_lower" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rf_link_upper" link2="rf_lower" reason="Never" />
+    <disable_collisions link1="rf_link_upper" link2="rf_upper" reason="Adjacent" />
+    <disable_collisions link1="rf_link_upper" link2="rr_base" reason="Never" />
+    <disable_collisions link1="rf_link_upper" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="rf_link_upper" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rf_link_upper" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="rf_link_upper" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rf_lower" link2="rf_upper" reason="Never" />
+    <disable_collisions link1="rf_lower" link2="rr_base" reason="Never" />
+    <disable_collisions link1="rf_lower" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="rf_lower" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rf_lower" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="rf_lower" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rf_upper" link2="rr_base" reason="Never" />
+    <disable_collisions link1="rf_upper" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="rf_upper" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rf_upper" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="rf_upper" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rr_base" link2="rr_link_ball" reason="Never" />
+    <disable_collisions link1="rr_base" link2="rr_link_foot" reason="Never" />
+    <disable_collisions link1="rr_base" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="rr_base" link2="rr_link_upper" reason="Adjacent" />
+    <disable_collisions link1="rr_base" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="rr_base" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rr_link_ball" link2="rr_link_foot" reason="Adjacent" />
+    <disable_collisions link1="rr_link_ball" link2="rr_link_lower" reason="Never" />
+    <disable_collisions link1="rr_link_ball" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rr_link_ball" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="rr_link_ball" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rr_link_foot" link2="rr_link_lower" reason="Default" />
+    <disable_collisions link1="rr_link_foot" link2="rr_link_upper" reason="Never" />
+    <disable_collisions link1="rr_link_foot" link2="rr_lower" reason="Adjacent" />
+    <disable_collisions link1="rr_link_foot" link2="rr_upper" reason="Never" />
+    <disable_collisions link1="rr_link_lower" link2="rr_link_upper" reason="Default" />
+    <disable_collisions link1="rr_link_lower" link2="rr_lower" reason="Adjacent" />
+    <disable_collisions link1="rr_link_lower" link2="rr_upper" reason="Adjacent" />
+    <disable_collisions link1="rr_link_upper" link2="rr_lower" reason="Never" />
+    <disable_collisions link1="rr_link_upper" link2="rr_upper" reason="Adjacent" />
+    <disable_collisions link1="rr_lower" link2="rr_upper" reason="Never" />
+</robot>

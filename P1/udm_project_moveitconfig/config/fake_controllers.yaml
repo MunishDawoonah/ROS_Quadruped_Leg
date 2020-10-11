@@ -1,0 +1,13 @@
+controller_list:
+  - name: fake_fl_controller
+    joints:
+      - lf_hinge_1
+      - lf_hinge_2
+      - lf_hinge_3
+      - lf_hinge_4
+  - name: fake_end_fl_controller
+    joints:
+      - lf_hinge_4
+initial:  # Define initial robot poses.
+  - group: fl
+    pose: Pose_1

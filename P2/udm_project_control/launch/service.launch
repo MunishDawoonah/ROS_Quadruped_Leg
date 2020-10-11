@@ -1,0 +1,3 @@
+<launch>
+	<node name="movement" pkg="udm_project_control" type="kin_service.py"/>
+</launch>

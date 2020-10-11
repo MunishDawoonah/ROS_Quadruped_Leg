@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="legged">
+  <material name="Black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="Coral">
+    <color rgba="1 0.5 0.2 1"/>
+  </material>
+  <material name="Gray">
+    <color rgba="0 0.8 0.0 1.0"/>
+  </material>
+  <material name="blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+
+  <material name="Yellow">
+    <color rgba="0.8 0.8 0.0 1.0"/>
+  </material>
+
+  <link name="base_foot"/>
+
+  <!--body-->
+
+  <link name="base_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.5 0.3 0.05"/>
+      </geometry>
+      <material name="Gray"/>
+    </visual>
+  </link>
+  <joint name="base_link_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="base_foot"/>
+    <child link="base_link"/>
+  </joint>
+
+  <!--Front left leg -->
+  <link name="lf_base">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  </link>
+  <link name="lf_upper">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="lf_upper_joint" type="fixed">
+    <parent link="lf_link_upper"/>
+    <child link="lf_upper"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0.2"/>
+  </joint>
+
+  <link name="lf_link_lower">
+    <visual>
+      <origin rpy="0 1.5707 0" xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  <link name="lf_link_upper">
+    <visual>
+      <origin rpy="0 1.5707 0" xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+
+  <link name="lf_lower">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="lf_lower_joint" type="fixed">
+    <parent link="lf_link_lower"/>
+    <child link="lf_lower"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0.2"/>
+  </joint>
+
+  <link name="lf_link_foot">
+    <visual>
+      <origin rpy="0 0 1.5707 " xyz="0 0.1 0"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  <link name="lf_link_ball">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="lf_ball_joint" type="fixed">
+    <parent link="lf_link_foot"/>
+    <child link="lf_link_ball"/>
+    <origin rpy="1.5707 0 0" xyz="0 0.2 0 "/>
+  </joint>
+
+  <!--joint-->
+  <joint name="lf_hinge_1" type="revolute">
+    <parent link="base_link"/>
+    <child link="lf_base"/>
+    <origin rpy="1.5707 0.785 0" xyz="0.23 0.17 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000" lower="0.21" upper="1.21" velocity="100.0"/>
+  </joint>
+
+  <joint name="lf_hinge_2" type="revolute">
+    <parent link="lf_base"/>
+    <child link="lf_link_upper"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-0.1963" upper="0.1963" velocity="100.0"/>
+  </joint>
+
+  <joint name="lf_hinge_3" type="revolute">
+    <parent link="lf_upper"/>
+    <child link="lf_link_lower"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-1.64" upper="0.17" velocity="100.0"/>
+  </joint>
+
+  <joint name="lf_hinge_4" type="revolute">
+    <parent link="lf_lower"/>
+    <child link="lf_link_foot"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-1.63" upper="0.62" velocity="100.0"/>
+  </joint>
+  <!-- /Front left leg -->
+  
+  <!-- Front right leg  -->
+  <link name="rf_base">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    
+  </link>
+  <link name="rf_upper">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+   
+  </link>
+  <joint name="rf_upper_joint" type="fixed">
+    <parent link="rf_link_upper"/>
+    <child link="rf_upper"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0.2"/>
+  </joint>
+  <link name="rf_link_lower">
+    <visual>
+      <origin rpy="0 1.5707 0" xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  <link name="rf_link_upper">
+    <visual>
+      <origin rpy="0 1.5707 0" xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+
+  <link name="rf_lower">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="rf_lower_joint" type="fixed">
+    <parent link="rf_link_lower"/>
+    <child link="rf_lower"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0.2"/>
+  </joint>
+
+  <link name="rf_link_foot">
+    <visual>
+      <origin rpy="0 0 1.5707 " xyz="0 0.1 0"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  <link name="rf_link_ball">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="rf_ball_joint" type="fixed">
+    <parent link="rf_link_foot"/>
+    <child link="rf_link_ball"/>
+    <origin rpy="1.5707 0 0" xyz="0 0.2 0 "/>
+  </joint>
+  <!--joint-->
+  
+  <joint name="rf_hinge_1" type="revolute">
+    <parent link="base_link"/>
+    <child link="rf_base"/>
+    <origin rpy="1.5707 0.785 0" xyz="0.23 -0.17 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000" lower="0.21" upper="1.21" velocity="100.0"/>
+  </joint>
+  
+  <joint name="rf_hinge_2" type="revolute">
+    <parent link="rf_base"/>
+    <child link="rf_link_upper"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-0.1963" upper="0.1963" velocity="100.0"/>
+  </joint>
+  
+  <joint name="rf_hinge_3" type="revolute">
+    <parent link="rf_upper"/>
+    <child link="rf_link_lower"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-1.64" upper="0.17" velocity="100.0"/>
+  </joint>
+  
+  <joint name="rf_hinge_4" type="revolute">
+    <parent link="rf_lower"/>
+    <child link="rf_link_foot"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-1.63" upper="0.62" velocity="100.0"/>
+  </joint>
+
+  <!--Rear left leg -->
+  <link name="lr_base">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  </link>
+  <link name="lr_upper">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  </link>
+  <joint name="lr_upper_joint" type="fixed">
+    <parent link="lr_link_upper"/>
+    <child link="lr_upper"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0.2"/>
+  </joint>
+  <link name="lr_link_lower">
+    <visual>
+      <origin rpy="0 1.5707 0" xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  <link name="lr_link_upper">
+    <visual>
+      <origin rpy="0 1.5707 0" xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  
+  <link name="lr_lower">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="lr_lower_joint" type="fixed">
+    <parent link="lr_link_lower"/>
+    <child link="lr_lower"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0.2"/>
+  </joint>
+
+  <link name="lr_link_foot">
+    <visual>
+      <origin rpy="0 0 1.5707 " xyz="0 0.1 0"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  <link name="lr_link_ball">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="lr_link_ball_joint" type="fixed">
+    <parent link="lr_link_foot"/>
+    <child link="lr_link_ball"/>
+    <origin rpy="1.5707 0 0" xyz="0 0.2 0 "/>
+  </joint>  
+
+  <!--joint-->
+  <joint name="lr_hinge_1" type="revolute">
+    <parent link="base_link"/>
+    <child link="lr_base"/>
+    <origin rpy="1.5707 0.785 0" xyz="-0.23 0.17 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000" lower="0.21" upper="1.21" velocity="100.0"/>
+  </joint>
+  
+  <joint name="lr_hinge_2" type="revolute">
+    <parent link="lr_base"/>
+    <child link="lr_link_upper"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-0.1963" upper="0.1963" velocity="100.0"/>
+  </joint>
+  
+  <joint name="lr_hinge_3" type="revolute">
+    <parent link="lr_upper"/>
+    <child link="lr_link_lower"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-1.64" upper="0.17" velocity="100.0"/>
+  </joint>
+  
+  <joint name="lr_hinge_4" type="revolute">
+    <parent link="lr_lower"/>
+    <child link="lr_link_foot"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-1.63" upper="0.62" velocity="100.0"/>
+  </joint>  
+  <!-- /Rear left leg -->
+
+ <!--Rear right leg -->
+  <link name="rr_base">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  </link>
+  <link name="rr_upper">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  </link>
+  <joint name="rr_upper_joint" type="fixed">
+    <parent link="rr_link_upper"/>
+    <child link="rr_upper"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0.2"/>
+  </joint>
+  <link name="rr_link_lower">
+    <visual>
+      <origin rpy="0 1.5707 0" xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  <link name="rr_link_upper">
+    <visual>
+      <origin rpy="0 1.5707 0" xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+  
+  <link name="rr_lower">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="rr_lower_joint" type="fixed">
+    <parent link="rr_link_lower"/>
+    <child link="rr_lower"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0.2"/>
+  </joint>
+
+  <link name="rr_link_foot">
+    <visual>
+      <origin rpy="0 0 1.5707 " xyz="0 0.1 0"/>
+      <geometry>
+        <box size="0.2 0.02 0.05"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+  </link>
+    <link name="rr_link_ball">
+    <visual>
+      <geometry>
+        <sphere length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>  
+  </link>
+
+  <joint name="rr_link_ball_joint" type="fixed">
+    <parent link="rr_link_foot"/>
+    <child link="rr_link_ball"/>
+    <origin rpy="1.5707 0 0" xyz="0 0.2 0 "/>
+  </joint>
+  <!--joint-->
+  
+  <joint name="jrr_hinge_1" type="revolute">
+    <parent link="base_link"/>
+    <child link="rr_base"/>
+    <origin rpy="1.5707 0.785 0" xyz="-0.23 -0.17 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000" lower="0.21" upper="1.21" velocity="100.0"/>
+  </joint>
+  
+  <joint name="jrr_hinge_2" type="revolute">
+    <parent link="rr_base"/>
+    <child link="rr_link_upper"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-0.1963" upper="0.1963" velocity="100.0"/>
+  </joint>
+  
+  <joint name="jrr_hinge_3" type="revolute">
+    <parent link="rr_upper"/>
+    <child link="rr_link_lower"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-1.64" upper="0.17" velocity="100.0"/>
+  </joint>
+  
+  <joint name="jrr_hinge_4" type="revolute">
+    <parent link="rr_lower"/>
+    <child link="rr_link_foot"/>
+    <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="-1.63" upper="0.62" velocity="100.0"/>
+  </joint>
+</robot>
